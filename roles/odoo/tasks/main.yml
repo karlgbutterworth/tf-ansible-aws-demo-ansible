@@ -1,0 +1,8 @@
+- name: Install Odoo software (17)
+  ansible.builtin.git:
+  repo: "https://github.com/odoo/odoo.git"
+  dest: "/opt/odoo"
+  version: "17.0"    # <-- The branch you want
+  force: no                   # Optional: force checkout if dest exists
+  update: no                  # Optional: pull latest changes if repo exists
+   
