@@ -4,6 +4,11 @@
     - name: Ping all hosts
       ansible.builtin.ping:
 
+- hosts: all
+  become: yes
+  roles:
+    - prompt
+
 # - hosts: odoo-17
   # become: yes
   # tasks:

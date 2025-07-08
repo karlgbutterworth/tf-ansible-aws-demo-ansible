@@ -1,5 +1,5 @@
 
-[instances]
+[staging]
 redhat9      ansible_host=redhat9.ansible.internal ansible_user=ec2-user
 redhat10x86  ansible_host=redhat10x86.ansible.internal ansible_user=ec2-user
 redhat10xarm ansible_host=redhat10xarm.ansible.internal ansible_user=ec2-user
