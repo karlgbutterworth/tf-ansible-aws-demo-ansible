@@ -1,8 +1,28 @@
-- name: Install Odoo software (17)
-  ansible.builtin.git:
-  repo: "https://github.com/odoo/odoo.git"
-  dest: "/opt/odoo"
-  version: "17.0"    # <-- The branch you want
-  force: no                   # Optional: force checkout if dest exists
-  update: no                  # Optional: pull latest changes if repo exists
-   
+- name: Clone the Odoo repository via SSH
+  hosts: all
+  become: yes        # Remove if not needed
+  vars:
+    repo_url: "git@github.com:odoo/odoo.git"
+    dest_dir: "/opt/odoo"
+
+  tasks:
+    - name: Ensure git is installed
+      ansible.builtin.package:
+        name: git
+        state: present
+
+    - name: Ensure the destination directory exists
+      ansible.builtin.file:
+        path: "{{ dest_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Clone the Odoo repository (SSH)
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "{{ dest_dir }}"
+        key_file: "/home/ec2-user/.ssh/id_rsa.pub"   
+        accept_hostkey: yes
+        clone: yes
+        update: no
+
